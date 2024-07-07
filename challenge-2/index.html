@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Desáfio 1 - Formulário de Pedido</title>
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="header">
+      <img
+        class="header__logo"
+        src="assets/logo.svg"
+        alt="Logo da Jitterbit"
+        width="166px"
+        height="32px"
+      />
+      <h1 class="header__title">Pedido</h1>
+    </header>
+    <main class="main">
+      <h2 class="title">Formulário</h2>
+      <form class="form" method="post">
+        <fieldset class="fields">
+          <legend class="fields__legend">Informações do Cliente</legend>
+          <label class="field">
+            <span class="field__label">Nome Completo</span>
+            <input
+              class="field__input"
+              id="fullname"
+              name="client.fullname"
+              type="text"
+              required
+            />
+          </label>
+          <label class="field">
+            <span class="field__label">E-mail</span>
+            <input
+              class="field__input"
+              id="email"
+              name="client.email"
+              type="email"
+              required
+            />
+          </label>
+          <label class="field">
+            <span class="field__label">Telefone</span>
+            <input
+              class="field__input"
+              id="phoneNumber"
+              name="client.phoneNumber"
+              type="tel"
+              required
+            />
+          </label>
+        </fieldset>
+        <fieldset class="fields fields--md-6">
+          <legend class="fields__legend">Endereço de Entrega</legend>
+          <label class="field field--md-8">
+            <span class="field__label">Rua e Número</span>
+            <input
+              class="field__input"
+              id="streetAndNumber"
+              name="address.streetAndNumber"
+              type="text"
+              required
+            />
+          </label>
+          <label class="field field--md-4">
+            <span class="field__label">Complemento</span>
+            <input
+              class="field__input"
+              id="complement"
+              name="address.complement"
+              type="text"
+            />
+          </label>
+          <label class="field">
+            <span class="field__label">Bairro</span>
+            <input
+              class="field__input"
+              id="neighborhood"
+              name="address.neighborhood"
+              type="text"
+              required
+            />
+          </label>
+          <label class="field field--sm-8">
+            <span class="field__label">Cidade</span>
+            <input
+              class="field__input"
+              id="city"
+              name="address.city"
+              type="text"
+              required
+            />
+          </label>
+          <label class="field field--sm-4">
+            <span class="field__label">UF</span>
+            <select
+              class="field__input"
+              id="state"
+              name="address.state"
+              required
+            >
+              <option value="AC">AC</option>
+              <option value="AL">AL</option>
+              <option value="AM">AM</option>
+              <option value="BA">BA</option>
+              <option value="CE">CE</option>
+              <option value="DF">DF</option>
+              <option value="ES">ES</option>
+              <option value="GO">GO</option>
+              <option value="MA">MA</option>
+              <option value="MG">MG</option>
+              <option value="MS">MS</option>
+              <option value="MT">MT</option>
+              <option value="PA">PA</option>
+              <option value="PB">PB</option>
+              <option value="PI">PI</option>
+              <option value="PE">PE</option>
+              <option value="PR">PR</option>
+              <option value="RJ">RJ</option>
+              <option value="RN">RN</option>
+              <option value="RO">RO</option>
+              <option value="RR">RR</option>
+              <option value="RS">RS</option>
+              <option value="SC">SC</option>
+              <option value="SE">SE</option>
+              <option value="SP">SP</option>
+              <option value="TO">TO</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field__label">CEP</span>
+            <input
+              class="field__input"
+              id="zipCode"
+              name="address.zipCode"
+              type="text"
+              required
+            />
+          </label>
+        </fieldset>
+        <fieldset class="fields fields--md-6">
+          <legend class="fields__legend">Informações do Pedido</legend>
+          <label class="field field--sm-8">
+            <span class="field__label">Produto</span>
+            <select class="field__input" id="productId" name="product.id">
+              <option value="0">Cerveja</option>
+              <option value="1">Notebook</option>
+              <option value="2">Cabo USB</option>
+              <option value="3">Monitor</option>
+              <option value="4">Teclado</option>
+            </select>
+          </label>
+          <label class="field field--sm-4">
+            <span class="field__label">Quantidade</span>
+            <input
+              class="field__input"
+              id="amount"
+              name="product.amount"
+              type="number"
+              min="0"
+              required
+            />
+          </label>
+          <fieldset class="radio">
+            <legend class="radio__label">Método de Pagamento</legend>
+            <label class="radio__option">
+              <input
+                class="radio__option__radio"
+                id="credit"
+                name="paymentMethod"
+                value="credit"
+                type="radio"
+                required
+              />
+              <span class="radio__option__label">Cartão de Crédito</span>
+            </label>
+            <label class="radio__option">
+              <input
+                class="radio__option__radio"
+                id="boleto"
+                name="paymentMethod"
+                value="boleto"
+                type="radio"
+                required
+              />
+              <span class="radio__option__label">Boleto Bancário</span>
+            </label>
+            <label class="radio__option">
+              <input
+                class="radio__option__radio"
+                id="paypal"
+                name="paymentMethod"
+                value="paypal"
+                type="radio"
+                required
+              />
+              <span class="radio__option__label">PayPal</span>
+            </label>
+          </fieldset>
+        </fieldset>
+        <fieldset class="form__footer">
+          <button class="button button--color-success" type="submit">
+            Enviar Pedido
+          </button>
+          <button class="button button--color-danger" type="reset">
+            Limpar Formulário
+          </button>
+        </fieldset>
+      </form>
+    </main>
+    <footer class="footer">
+      <section class="footer__section">
+        <h2 class="footer__section__header">Nossas informações de contato</h2>
+        <ul class="footer__list">
+          <li>
+            Endereço:
+            <span class="text-detail">
+              Rua Travessa David, 345, 69073-330, Bairro Betânia, Manaus/AM
+            </span>
+          </li>
+          <li>
+            Telefone:
+            <a class="text-detail" href="tel:+5592987654321">
+              +55 (92) 98765-4321
+            </a>
+          </li>
+          <li>
+            E-mail:
+            <a class="text-detail" href="mailto:foobar@foobar.com">
+              foobar@foobar.com
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="footer__section">
+        <h2 class="footer__section__header">Nossas redes sociais</h2>
+        <nav class="footer__list">
+          <a href="facebook.com/foobar">Facebook</a>
+          <a href="twitter.com/foobar">Twitter</a>
+          <a href="instagram.com/foobar">Instagram</a>
+          <a href="linkedin.com/company/foobar">LinkedIn</a>
+        </nav>
+      </section>
+      <section class="footer__copyright">
+        <p>
+          ©2024 FooBar. Marcas registradas pertencentes às entidades
+          apropriadas.
+        </p>
+      </section>
+    </footer>
+  </body>
+</html>
