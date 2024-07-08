@@ -7,7 +7,7 @@ export async function withDB(cb) {
   try {
     client = await MongoClient.connect(MONGO_CONNECTION_URL);
     const db = client.db(MONGO_DB);
-    return cb(db);
+    return await cb(db);
   } finally {
     await client?.close();
   }
