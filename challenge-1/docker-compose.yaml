@@ -10,7 +10,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     environment:
-      MONGO_CONNECTION_URL: "mongodb://root:root@mongo:27017/"
+      MONGO_CONNECTION_URL: "mongodb://root:root@mongo:27017/?authSource=admin"
       MONGO_DB: "jitterbit-challenge-1"
     networks:
       - challenge
