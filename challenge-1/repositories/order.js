@@ -15,3 +15,13 @@ export function findOrder(orderId) {
     return orders.findOne({ orderId }, { projection: { _id: 0 } });
   });
 }
+
+export function findAllOrders(skip, limit) {
+  return withOrders(async (orders) => {
+    return orders
+      .find({}, { projection: { _id: 0 } })
+      .skip(skip)
+      .limit(limit)
+      .toArray();
+  });
+}

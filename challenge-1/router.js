@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getOrder, postOrder } from "./controllers/order.js";
+import { getOrder, indexOrders, postOrder } from "./controllers/order.js";
 
 function routeHandlerFor(handler) {
   return async (request, response, next) => {
@@ -26,6 +26,7 @@ const router = Router();
 
 router.post("/order", routeHandlerFor(postOrder));
 router.get("/order/:orderId", routeHandlerFor(getOrder));
+router.get("/order", routeHandlerFor(indexOrders));
 
 router.use(errorHandler);
 

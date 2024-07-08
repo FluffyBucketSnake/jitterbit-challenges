@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { createOrder, findOrder } from "../repositories/order.js";
+import {
+  createOrder,
+  findAllOrders,
+  findOrder,
+} from "../repositories/order.js";
 
 const orderInSchema = z
   .object({
@@ -43,4 +47,11 @@ export async function getOrder(request, response) {
     return response.status(404).send();
   }
   return response.status(200).send(order);
+}
+
+export async function indexOrders(request, response) {
+  const { skip = 0, limit = 20 } = request.params;
+  return response
+    .status(200)
+    .send(await findAllOrders(skip, Math.max(limit, 40)));
 }
