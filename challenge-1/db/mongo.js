@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 const MONGODB_URL = "mongodb://localhost:27017/";
 const MONGODB_DB = "jitterbit-challenge-1";
 
-export async function connectToDB(cb) {
+export async function withDB(cb) {
   let client = null;
   try {
     client = await MongoClient.connect(MONGODB_URL);
@@ -13,3 +13,12 @@ export async function connectToDB(cb) {
     await client?.close();
   }
 }
+
+export async function withCollection(collectionName, cb) {
+  return withDB((db) => {
+    const collection = db.collection(collectionName);
+    return cb(collection);
+  });
+}
+
+export const withOrders = withCollection.bind(null, "orders");

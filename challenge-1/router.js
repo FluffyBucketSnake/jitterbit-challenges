@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { postOrder } from "./controllers/order.js";
+import { getOrder, postOrder } from "./controllers/order.js";
 
 function routeHandlerFor(handler) {
   return async (request, response, next) => {
@@ -11,18 +11,21 @@ function routeHandlerFor(handler) {
   };
 }
 
-function errorHandler(error, _, response, next) {
+function errorHandler(error, _0, response, _1) {
   if (error instanceof z.ZodError) {
     return response.status(422).send({
       message: error.message,
     });
   }
-  return next(error);
+  return response
+    .status(500)
+    .send({ message: "An unexpected error happened." });
 }
 
 const router = Router();
 
 router.post("/order", routeHandlerFor(postOrder));
+router.get("/order/:orderId", routeHandlerFor(getOrder));
 
 router.use(errorHandler);
 
