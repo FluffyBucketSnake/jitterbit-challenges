@@ -7,6 +7,7 @@ import {
   deleteOrder,
 } from "./controllers/order.js";
 import { z } from "zod";
+import { apiAuthentication } from "./middlewares/api-auth.js";
 
 // Wraps async functions to ensure they are handled by
 // Express.js error handling mechanism
@@ -26,6 +27,9 @@ function errorHandler(error, _0, response, _1) {
       message: error.message,
     });
   }
+  if (error.status != null) {
+    return response.status(error.status).send({ message: error.message });
+  }
   return response
     .status(500)
     .send({ message: "An unexpected error happened." });
@@ -33,6 +37,7 @@ function errorHandler(error, _0, response, _1) {
 
 const router = Router();
 
+router.use(apiAuthentication);
 router.post("/order", routeHandlerFor(postOrder));
 router.get("/order/:orderId", routeHandlerFor(getOrder));
 router.get("/order", routeHandlerFor(indexOrders));
