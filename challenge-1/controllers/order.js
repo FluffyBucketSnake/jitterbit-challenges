@@ -3,6 +3,7 @@ import {
   createOrder,
   findAllOrders,
   findOrder,
+  updateOrder,
 } from "../repositories/order.js";
 
 const orderInSchema = z
@@ -54,4 +55,14 @@ export async function indexOrders(request, response) {
   return response
     .status(200)
     .send(await findAllOrders(skip, Math.max(limit, 40)));
+}
+
+export async function putOrder(request, response) {
+  const { orderId } = request.params;
+  const parsedBody = orderInSchema.parse(request.body);
+  const order = await updateOrder(orderId, parsedBody);
+  if (order === null) {
+    return response.status(404).send();
+  }
+  response.status(200).send(order);
 }

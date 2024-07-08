@@ -25,3 +25,13 @@ export function findAllOrders(skip, limit) {
       .toArray();
   });
 }
+
+export function updateOrder(orderId, order) {
+  return withOrders(async (orders) => {
+    const result = await orders.updateOne({ orderId }, { $set: order });
+    if (result.matchedCount === 0) {
+      return null;
+    }
+    return order;
+  });
+}

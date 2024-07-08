@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { getOrder, indexOrders, postOrder } from "./controllers/order.js";
+import {
+  getOrder,
+  indexOrders,
+  putOrder,
+  postOrder,
+} from "./controllers/order.js";
 
 function routeHandlerFor(handler) {
   return async (request, response, next) => {
@@ -27,6 +32,7 @@ const router = Router();
 router.post("/order", routeHandlerFor(postOrder));
 router.get("/order/:orderId", routeHandlerFor(getOrder));
 router.get("/order", routeHandlerFor(indexOrders));
+router.put("/order/:orderId", routeHandlerFor(putOrder));
 
 router.use(errorHandler);
 
