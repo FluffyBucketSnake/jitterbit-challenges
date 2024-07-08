@@ -1,13 +1,12 @@
 import { MongoClient } from "mongodb";
 
-const MONGODB_URL = "mongodb://localhost:27017/";
-const MONGODB_DB = "jitterbit-challenge-1";
+const { MONGO_CONNECTION_URL, MONGO_DB } = process.env;
 
 export async function withDB(cb) {
   let client = null;
   try {
-    client = await MongoClient.connect(MONGODB_URL);
-    const db = client.db(MONGODB_DB);
+    client = await MongoClient.connect(MONGO_CONNECTION_URL);
+    const db = client.db(MONGO_DB);
     return cb(db);
   } finally {
     await client?.close();

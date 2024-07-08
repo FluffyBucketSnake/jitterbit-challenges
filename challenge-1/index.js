@@ -1,7 +1,9 @@
+import "dotenv/config.js";
+
 import express from "express";
 import router from "./router.js";
 
-const HOST_PORT = 6000; //TODO: use dotenv
+const { HOST_PORT } = process.env;
 
 const app = express();
 app.use(express.json());
