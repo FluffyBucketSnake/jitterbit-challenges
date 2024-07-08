@@ -3,6 +3,7 @@ import {
   createOrder,
   findAllOrders,
   findOrder,
+  removeOrder,
   updateOrder,
 } from "../repositories/order.js";
 
@@ -65,4 +66,10 @@ export async function putOrder(request, response) {
     return response.status(404).send();
   }
   response.status(200).send(order);
+}
+
+export async function deleteOrder(request, response) {
+  const { orderId } = request.params;
+  await removeOrder(orderId);
+  response.status(200).send();
 }

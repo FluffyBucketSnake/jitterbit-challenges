@@ -35,3 +35,9 @@ export function updateOrder(orderId, order) {
     return order;
   });
 }
+
+export function removeOrder(orderId) {
+  return withOrders(async (orders) => {
+    await orders.deleteOne({ orderId });
+  });
+}

@@ -4,6 +4,7 @@ import {
   indexOrders,
   putOrder,
   postOrder,
+  deleteOrder,
 } from "./controllers/order.js";
 
 function routeHandlerFor(handler) {
@@ -33,6 +34,7 @@ router.post("/order", routeHandlerFor(postOrder));
 router.get("/order/:orderId", routeHandlerFor(getOrder));
 router.get("/order", routeHandlerFor(indexOrders));
 router.put("/order/:orderId", routeHandlerFor(putOrder));
+router.delete("/order/:orderId", routeHandlerFor(deleteOrder));
 
 router.use(errorHandler);
 
