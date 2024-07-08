@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { withOrders } from "../db/mongo.js";
+import { createOrder, findOrder } from "../repositories/order.js";
 
 const orderInSchema = z
   .object({
@@ -27,16 +27,18 @@ const orderInSchema = z
 
 export async function postOrder(request, response) {
   const parsedBody = orderInSchema.parse(request.body);
-  console.log(parsedBody);
-  response.status(201).send(parsedBody);
+  const order = await createOrder(parsedBody);
+  if (order == null) {
+    return response.status(400).send({
+      message: "An order with the same ID already exists",
+    });
+  }
+  response.status(201).send(order);
 }
 
 export async function getOrder(request, response) {
   const { orderId } = request.params;
-  const order = await withOrders((collection) => {
-    return collection.findOne({ orderId });
-  });
-  console.log(order);
+  const order = await findOrder(orderId);
   if (order == null) {
     return response.status(404).send();
   }
