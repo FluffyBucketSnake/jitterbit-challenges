@@ -33,7 +33,7 @@ const orderInSchema = z
 export async function postOrder(request, response) {
   const parsedBody = orderInSchema.parse(request.body);
   const order = await createOrder(parsedBody);
-  if (order == null) {
+  if (order === null) {
     return response.status(400).send({
       message: "An order with the same ID already exists",
     });
@@ -44,7 +44,7 @@ export async function postOrder(request, response) {
 export async function getOrder(request, response) {
   const { orderId } = request.params;
   const order = await findOrder(orderId);
-  if (order == null) {
+  if (order === null) {
     return response.status(404).send();
   }
   return response.status(200).send(order);
