@@ -8,6 +8,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    restart: always
     environment:
       MONGO_CONNECTION_URL: "mongodb://root:root@mongo:27017/"
       MONGO_DB: "jitterbit-challenge-1"
@@ -15,7 +16,7 @@ services:
       - challenge
     ports:
       - "6000:6000"
-  mongodb:
+  mongo:
     image: "mongo:latest"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
