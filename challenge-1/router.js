@@ -7,6 +7,8 @@ import {
   deleteOrder,
 } from "./controllers/order.js";
 
+// Wraps async functions to ensure they are handled by
+// Express.js error handling mechanism
 function routeHandlerFor(handler) {
   return async (request, response, next) => {
     try {
